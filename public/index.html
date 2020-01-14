@@ -20,10 +20,19 @@
       </select>
       <button type="submit">Submit</button>
     </form>
-    <p v-if="convertedValueFromEuro">The amount is {{ convertedValueFromEuro }}</p>
+    <p v-if="convertedValue">The amount in {{ currencySelected.name }} is {{ convertedValue }}</p>
 
-    <input type="number" v-model="userAmountToEuro">
+    <form v-on:submit.prevent="convertToEuro">
+      <input type="number" v-model="userAmountToEuro">
+      <select v-model="currencySelected">
+        <option v-for="(value, name) in currencyRates" :value="{name: name, value: value}">
+          {{ name }}
+        </option>
+      </select>
+      <button type="submit">Submit</button>
+    </form>
 
+    <p v-if="convertedValueToEuro">The amount in Euro is {{ convertedValueToEuro }}</p>
 
   </div>
 </body>
